@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even & Odd Numbers</title>
+    <style>
+        :root {
+            --ink: #202124;
+            --muted: #777982;
+            --line: #e8e8e5;
+            --even: #18794e;
+            --odd: #a23b50;
+            --even-wash: #edf7f1;
+            --odd-wash: #faf0f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 64px 24px;
+            background: #f7f7f4;
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .app {
+            width: min(1120px, 100%);
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 28px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(42px, 7vw, 76px);
+            font-weight: 400;
+            line-height: 0.9;
+            letter-spacing: -0.055em;
+        }
+
+        .subtitle {
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .legend {
+            padding-bottom: 4px;
+            display: flex;
+            gap: 20px;
+            flex-shrink: 0;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .legend span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend span::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .legend-even {
+            color: var(--even);
+        }
+
+        .legend-odd {
+            color: var(--odd);
+        }
+
+        #display {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            border-top: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+        }
+
+        #display p {
+            min-width: 0;
+            aspect-ratio: 1.25;
+            margin: 0;
+            padding: 14px 10px;
+            display: grid;
+            place-items: center;
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.2;
+            text-align: center;
+            transition: background 150ms ease, transform 150ms ease;
+        }
+
+        #display p[style*="green"] {
+            color: var(--even) !important;
+        }
+
+        #display p[style*="red"] {
+            color: var(--odd) !important;
+        }
+
+        #display p[style*="green"]:hover {
+            background: var(--even-wash);
+        }
+
+        #display p[style*="red"]:hover {
+            background: var(--odd-wash);
+        }
+
+        #display p:hover {
+            position: relative;
+            z-index: 1;
+            transform: scale(1.06);
+            box-shadow: 0 8px 24px rgba(32, 33, 36, 0.10);
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 40px 16px;
+            }
+
+            #display {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 28px 12px;
+            }
+
+            .header {
+                align-items: flex-start;
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            #display {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #display p {
+                aspect-ratio: 2.4;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header class="header">
+            <div>
+                <h1>Numbers</h1>
+                <p class="subtitle">Even and odd · 1—100</p>
+            </div>
+            <div class="legend" aria-label="Number legend">
+                <span class="legend-even">Even</span>
+                <span class="legend-odd">Odd</span>
+            </div>
+        </header>
+
+        <section id="display" aria-live="polite"></section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
